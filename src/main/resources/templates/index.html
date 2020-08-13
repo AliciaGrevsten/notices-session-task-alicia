@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/journal/bootstrap.min.css"
+      integrity="sha384-QDSPDoVOoSWz2ypaRUidLmLYl4RyoBWI44iA5agn6jHegBxZkNqgm2eHb6yZ5bYs" crossorigin="anonymous">
+<head>
+    <meta charset="UTF-8">
+    <title>Notice Board</title>
+</head>
+<body>
+
+
+<div class="container text-center col-lg-10 col-lg-offset-2">
+    <br>
+    <h1>Notices</h1>
+    <br>
+    <br>
+
+    <div class="row float-right">
+        <form action="/addNotice" method="get">
+            <button type="submit" class="btn btn-danger "><strong>+</strong></button>
+        </form>
+    </div>
+    <br>
+    <br>
+
+    <div class="cards">
+        <div class="card border-primary mb-3 ml-1 mr-2 float-left" th:each="notice:${notices}"
+             style="max-width: 20rem;">
+            <div class="card-header" th:text="${notice.user.username}">Header</div>
+            <form class="card-body">
+                <h4 class="card-title" th:text="${notice.title}">Primary card title</h4>
+                <h6 class="card-subtitle mb-2 text-muted"
+                    th:text="${#dates.format(notice.published, 'yyyy-MM-dd HH:mm')}"></h6>
+                <p class="card-text" th:text="${notice.content}">Some quick example text to build on the card title and
+                    make up the bulk of the
+                    card's content.</p>
+                <a th:href="@{/editNotice/(id=${notice.id})}" class="card-link">Edit</a>
+                <a th:href="@{/delete/(id=${notice.id})}" class="card-link">Delete</a>
+                <a th:href="@{/showComments/(id=${notice.id})}" class="card-link">Comments</a>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
