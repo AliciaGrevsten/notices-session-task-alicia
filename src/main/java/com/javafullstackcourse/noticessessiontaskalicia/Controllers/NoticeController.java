@@ -59,7 +59,7 @@ public class NoticeController {
         response.sendRedirect("/");
     }
 
-    @RequestMapping(value = "/delete", method = {RequestMethod.DELETE, RequestMethod.GET})
+
     public void deleteNotice(HttpServletResponse response, @RequestParam int id) throws IOException {
         noticeService.deleteNotice(id);
         response.sendRedirect("/");

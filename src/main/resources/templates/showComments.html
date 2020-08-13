@@ -4,12 +4,12 @@
       integrity="sha384-QDSPDoVOoSWz2ypaRUidLmLYl4RyoBWI44iA5agn6jHegBxZkNqgm2eHb6yZ5bYs" crossorigin="anonymous">
 <head>
     <meta charset="UTF-8">
-    <title>Notice Board</title>
+    <title>Comments</title>
 </head>
 <body>
 
 
-<div class="container text-center col-lg-10 col-lg-offset-2">
+<div class="container text-center col-lg-7 col-lg-offset-5">
     <br>
     <h1>Comments</h1>
     <br>
@@ -27,16 +27,20 @@
         <tr class="table-primary" th:each="comment:${comments}">
             <td th:text="${comment.user.username}"></td>
             <td th:text="${comment.content}"></td>
-            <td th:text="${comment.published}"></td>
+            <td th:text="${#dates.format(comment.published, 'yyyy-MM-dd HH:mm')}"></td>
         </tr>
         </tbody>
     </table>
 
     <form class="form-group" action="/comment" method="post" onsubmit="return checkUserInput()">
-        <input type="hidden" th:value="${comments.get(1).notice.id}" id="id" name="id">
+        <input type="hidden" th:value="${notice.id}" id="id" name="id">
         <textarea class="form-control" id="commentcontent" name="content" rows="3"
                   placeholder="New comment.."></textarea>
         <button type="submit" class="btn btn-outline-primary float-right">Comment</button>
+    </form>
+
+    <form action="/" method="get">
+        <button class="btn btn-outline-secondary float-right">Back to start</button>
     </form>
 
 </div>
