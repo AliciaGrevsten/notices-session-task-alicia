@@ -9,20 +9,27 @@
 <body>
 
 
-<div class="container text-center col-lg-10 col-lg-offset-2">
+<div class="container col-lg-10 col-lg-offset-2">
     <br>
-    <h1>Notices</h1>
+    <h1 class="text-center">Notices</h1>
     <br>
     <br>
 
-    <div class="row float-right">
+    <!-- Buttons: "Add New Notice" and "Login" -->
+    <div class="row">
+        <!-- Trigger the modal with a button -->
+        <form action="/login" method="get">
+            <button type="submit" class="btn btn-danger btn-lg float-left" id="myBtn">Login</button>
+        </form>
+        <!-- Trigger adding new notice -->
         <form action="/addNotice" method="get">
-            <button type="submit" class="btn btn-danger "><strong>+</strong></button>
+            <button type="submit" class="btn btn-danger btn-lg float-right"><strong>+</strong></button>
         </form>
     </div>
     <br>
     <br>
 
+    <!-- Notices -->
     <div class="cards">
         <div class="card border-primary mb-3 ml-1 mr-2 float-left" th:each="notice:${notices}"
              style="max-width: 20rem;">
@@ -40,6 +47,7 @@
             </form>
         </div>
     </div>
+
 </div>
 </body>
 </html>

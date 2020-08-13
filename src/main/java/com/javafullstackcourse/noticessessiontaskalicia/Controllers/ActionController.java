@@ -25,6 +25,11 @@ public class ActionController {
         return "addNotice";
     }
 
+    @GetMapping("/login")
+    private String login() {
+        return "login";
+    }
+
     @GetMapping("/editNotice")
     private String editNotice(@RequestParam int id, Model model) {
         Notice notice = noticeService.getNotice(id);
