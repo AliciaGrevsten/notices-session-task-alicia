@@ -34,8 +34,9 @@
 
     <form class="form-group" action="/comment" method="post" onsubmit="return checkUserInput()">
         <input type="hidden" th:value="${notice.id}" id="id" name="id">
+        <label for="commentcontent"></label>
         <textarea class="form-control" id="commentcontent" name="content" rows="3"
-                  placeholder="New comment.."></textarea>
+                                                      placeholder="New comment.."></textarea>
         <button type="submit" class="btn btn-outline-primary float-right">Comment</button>
     </form>
 
@@ -51,7 +52,7 @@
     function checkUserInput() {
         var content = document.getElementById("commentcontent").value;
 
-        if (content.length == 0) {
+        if (content.length === 0) {
             alert("You have to write something in content!");
             return false;
         }
