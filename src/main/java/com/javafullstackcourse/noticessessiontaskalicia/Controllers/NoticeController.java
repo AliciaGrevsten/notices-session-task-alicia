@@ -5,6 +5,7 @@ import com.javafullstackcourse.noticessessiontaskalicia.Services.NoticeService;
 import com.javafullstackcourse.noticessessiontaskalicia.Utilities.SessionKeeper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -30,19 +31,30 @@ public class NoticeController {
     }
 
     @RequestMapping(value = "/edit", method = {RequestMethod.POST})
-    public void setNotice(HttpServletResponse response, @RequestParam int id, String title, String content) throws IOException {
+    public void setNotice(HttpServletResponse response, @RequestParam int id, String title, String content, Model model) throws IOException {
         Notice notice = noticeService.getNotice(id);
-        notice.title = title;
-        notice.content = content;
+        if (notice.appUser.id == SessionKeeper.getInstance().getUserSession().id) {
+            notice.title = title;
+            notice.content = content;
 
-        noticeService.addNotice(notice);
-        response.sendRedirect("/");
+            noticeService.addNotice(notice);
+            response.sendRedirect("/");
+        } else {
+            model.addAttribute("message", "You can only edit your own notices");
+            response.sendRedirect("/editNotice");
+        }
     }
 
+    @RequestMapping(value = "/delete", method = {RequestMethod.DELETE})
+    public void deleteNotice(HttpServletResponse response, @RequestParam int id, Model model) throws IOException {
+        if (noticeService.getNotice(id).appUser.id == SessionKeeper.getInstance().getUserSession().id) {
+            noticeService.deleteNotice(id);
+            response.sendRedirect("/");
+        } else {
+            model.addAttribute("message", "You can only delete your own notices");
+            response.sendRedirect("/editNotice");
+        }
 
-    public void deleteNotice(HttpServletResponse response, @RequestParam int id) throws IOException {
-        noticeService.deleteNotice(id);
-        response.sendRedirect("/");
     }
 
 

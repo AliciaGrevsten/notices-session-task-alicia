@@ -24,8 +24,10 @@
             <textarea class="form-control" th:text="${notice.content}" id="content" name="content" rows="3" placeholder="Content"></textarea>
         </div>
         <br>
-        <button type="submit" class="btn btn-outline-primary float-right">Publish</button>
+        <p th:text="${message}" class="text-danger"></p>
+        <button type="submit" class="btn btn-outline-primary float-right">Save Changes</button>
     </form>
+    <a th:href="@{/delete/(id=${notice.id})}" class="card-link">Delete</a>
 
     <form action="/" method="get">
         <button class="btn btn-outline-secondary float-left">Back to start</button>
@@ -36,10 +38,10 @@
         var title = document.getElementById("title").value;
         var content = document.getElementById("content").value;
 
-        if (title.length == 0) {
+        if (title.length === 0) {
             alert("Title is mandatory!");
             return false;
-        } else if (content.length == 0) {
+        } else if (content.length === 0) {
             alert("You have to write something in content!");
             return false;
         }

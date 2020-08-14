@@ -37,7 +37,7 @@ public class UserController {
     }
 
     @PostMapping("/logout")
-    public void logout(HttpSession session, HttpServletResponse response) throws  IOException {
+    public void logout(HttpSession session, HttpServletResponse response) throws IOException {
         SessionKeeper.getInstance().removeSession(session.getId());
         response.sendRedirect("/");
     }
