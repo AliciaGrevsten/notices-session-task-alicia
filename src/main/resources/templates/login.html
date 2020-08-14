@@ -28,6 +28,7 @@
 
             <button type="submit" class="btn btn-danger btn-success btn-block">Login</button>
         </form>
+        <a th:href="@{/editNotice/(id=${notice.id})}" class="card-link">Create New Account</a>
 
     </div>
 
@@ -35,4 +36,21 @@
 </div>
 </body>
 </html>
+
+<script>
+    function checkUserInput() {
+        var username = document.getElementById("username").value;
+        var psw = document.getElementById("psw").value;
+
+        if (username.length < 3) {
+            alert("Enter a correct username");
+            return false;
+        } else if (psw.length == 0) {
+            alert("Password need to 6 characters or more");
+            return false;
+        }
+        alert("Added!");
+        submitOK = true;
+    }
+</script>
 

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class ActionController {
+public class ViewController {
 
     @Autowired
     private NoticeService noticeService;
