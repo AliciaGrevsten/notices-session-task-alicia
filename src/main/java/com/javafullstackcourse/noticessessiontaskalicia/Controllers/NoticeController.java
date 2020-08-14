@@ -36,8 +36,9 @@ public class NoticeController {
 
             noticeService.addNotice(notice);
             response.sendRedirect("/");
+        }else {
+            response.sendRedirect("loginPage");
         }
-        response.sendRedirect("loginPage");
     }
 
     @RequestMapping(value = "/edit", method = {RequestMethod.POST})
@@ -53,13 +54,14 @@ public class NoticeController {
                 response.sendRedirect("/");
             } else {
                 model.addAttribute("message", "You can only edit your own notices");
-                response.sendRedirect("/editNotice");
+                response.sendRedirect("/editNotice?id=" + id);
             }
+        }else {
+            response.sendRedirect("loginPage");
         }
-        response.sendRedirect("/loginPage");
     }
 
-    @RequestMapping(value = "/delete", method = {RequestMethod.DELETE})
+    @RequestMapping(value = "/delete", method = {RequestMethod.DELETE, RequestMethod.GET})
     public void deleteNotice(HttpServletResponse response, @RequestParam int id, Model model, HttpSession session) throws IOException {
         if (SessionKeeper.getInstance().checkSession(session.getId())) {
             AppUser user = appUserService.getUserByUsername(SessionKeeper.getInstance().getUserSession().appUserUsername);
@@ -67,10 +69,10 @@ public class NoticeController {
                 noticeService.deleteNotice(id);
                 response.sendRedirect("/");
             } else {
-                model.addAttribute("message", "You can only delete your own notices");
-                response.sendRedirect("/editNotice");
+                response.sendRedirect("/editNotice?id=" + id);
             }
+        } else {
+            response.sendRedirect("loginPage");
         }
-        response.sendRedirect("loginPage");
     }
 }

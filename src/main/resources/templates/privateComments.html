@@ -62,10 +62,13 @@
 
 <script>
     function checkUserInput() {
-        var content = document.getElementById("commentcontent").value;
+        var commentcontent = document.getElementById("commentcontent").value;
+        var id = document.getElementById("id").value;
 
-        if (content.length === 0) {
+        if (commentcontent.length === 0) {
             alert("You have to write something in content!");
+            return false;
+        } else if (id == null) {
             return false;
         }
         submitOK = true;

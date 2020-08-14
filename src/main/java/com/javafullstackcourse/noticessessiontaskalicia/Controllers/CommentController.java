@@ -39,7 +39,8 @@ public class CommentController {
 
             commentService.addComment(comment);
             response.sendRedirect("/showComments?id=" + id);
+        } else {
+            response.sendRedirect("loginPage");
         }
-        response.sendRedirect("loginPage");
     }
 }

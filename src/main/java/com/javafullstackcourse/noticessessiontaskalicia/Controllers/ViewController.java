@@ -55,7 +55,6 @@ public class ViewController {
     private String editNotice(@RequestParam int id, Model model) {
         Notice notice = noticeService.getNotice(id);
         model.addAttribute(notice);
-        model.addAttribute("message", "");
         return "editNotice";
     }
 

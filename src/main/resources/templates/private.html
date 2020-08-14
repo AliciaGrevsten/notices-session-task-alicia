@@ -40,6 +40,7 @@
                     th:text="${#dates.format(notice.published, 'yyyy-MM-dd HH:mm')}"></h6>
                 <p class="card-text" th:text="${notice.content}"></p>
                 <a th:href="@{/editNotice/(id=${notice.id})}" class="card-link">Edit</a>
+                <a th:href="@{/delete/(id=${notice.id})}" class="card-link" type="submit">Delete</a>
                 <a th:href="@{/showComments/(id=${notice.id})}" class="card-link">Comments</a>
             </form>
         </div>

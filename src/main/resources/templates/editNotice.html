@@ -14,7 +14,8 @@
     <h1>Edit Notice</h1>
     <br>
     <br>
-c
+    <p th:text="${message}" class="text-danger"></p>
+
     <!-- Edit Notice Form -->
     <form class="form-group" action="/edit" method="post" onsubmit="return checkUserInput()"
           enctype="multipart/form-data">
@@ -25,10 +26,8 @@ c
             <textarea class="form-control" th:text="${notice.content}" id="content" name="content" rows="3" placeholder="Content"></textarea>
         </div>
         <br>
-        <p th:text="${message}" class="text-danger"></p>
         <button type="submit" class="btn btn-outline-primary float-right">Save Changes</button>
     </form>
-    <a th:href="@{/delete/(id=${notice.id})}" class="card-link">Delete</a>
 
     <!-- Back to start -->
     <form action="/" method="get">
@@ -40,6 +39,7 @@ c
     function checkUserInput() {
         var title = document.getElementById("title").value;
         var content = document.getElementById("content").value;
+        var id = document.getElementById("id").value;
 
         if (title.length === 0) {
             alert("Title is mandatory!");
@@ -47,8 +47,9 @@ c
         } else if (content.length === 0) {
             alert("You have to write something in content!");
             return false;
+        } else if (id == null) {
+            return false;
         }
-        alert("Added!");
         submitOK = true;
     }
 </script>
