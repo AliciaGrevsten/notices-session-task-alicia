@@ -14,20 +14,21 @@
     <h1>Register New Account</h1>
     <br>
     <br>
-
     <div>
-        <form role="form" th:action="@{/register}" method="post">
+        <form th:object="${user}" role="form" th:action="@{/register}" method="post" onsubmit="return checkUserInput()">
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" class="form-control" id="username" placeholder="Enter username">
+                <input type="text" th:field="*{username}" class="form-control" id="username"
+                       placeholder="Enter username">
             </div>
             <div class="form-group">
-                <label for="psw">Password</label>
-                <input type="text" class="form-control" id="psw" placeholder="Enter password">
+                <label for="password">Password</label>
+                <input type="text" th:field="*{password}" class="form-control" id="password" placeholder="Enter password">
             </div>
-
-            <button type="submit" class="btn btn-success btn-success btn-block">Register</button>
+            <p th:value="${message}"></p>
+            <button type="submit" class="btn btn-danger btn-block">Register</button>
         </form>
+        <br>
         <a th:href="@{/}" class="card-link">Back to start</a>
 
     </div>
@@ -40,16 +41,15 @@
 <script>
     function checkUserInput() {
         var username = document.getElementById("username").value;
-        var psw = document.getElementById("psw").value;
+        var password = document.getElementById("password").value;
 
         if (username.length < 3) {
-            alert("Enter a correct username");
+            alert("Username need to be 3 characters or more");
             return false;
-        } else if (psw.length < 6) {
-            alert("Password need to 6 characters or more");
+        } else if (password.length < 5) {
+            alert("Password need to 5 characters or more");
             return false;
         }
-        alert("Added!");
         submitOK = true;
     }
 </script>

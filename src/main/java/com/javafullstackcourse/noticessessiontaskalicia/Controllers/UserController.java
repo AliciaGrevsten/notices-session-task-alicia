@@ -5,6 +5,7 @@ import com.javafullstackcourse.noticessessiontaskalicia.Services.UserService;
 import com.javafullstackcourse.noticessessiontaskalicia.Utilities.SessionKeeper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -34,8 +35,26 @@ public class UserController {
         response.sendRedirect("/");
     }
 
-    @PostMapping ("/register")
-    public void register() {
+    @PostMapping("/logout")
+    public void logout(HttpSession session, HttpServletResponse response) throws  IOException {
+        SessionKeeper.getInstance().removeSession(session.getId());
+        response.sendRedirect("/");
+    }
 
+    @PostMapping ("/register")
+    public void register(@ModelAttribute("user") User user, HttpServletResponse response, Model model) throws IOException {
+        List<User> allUsers = userService.getAllUsers();
+
+        boolean userExists = allUsers
+                .stream()
+                .anyMatch(x -> x.getUsername().equals(user.getUsername()));
+
+        if (!userExists) {
+            userService.addUser(user);
+            response.sendRedirect("loginPage");
+        } else {
+            model.addAttribute("message", "User already exists.");
+            response.sendRedirect("registerPage");
+        }
     }
 }

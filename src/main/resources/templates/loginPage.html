@@ -13,17 +13,19 @@
     <h1>Login</h1>
     <br>
     <br>
-   <div>
-        <form th:object="${user}"  role="form" th:action="@{/login}" method="post" onsubmit="return checkUserInput()">
+    <div>
+        <form th:object="${user}" role="form" th:action="@{/login}" method="post" onsubmit="return checkUserInput()">
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" th:field="*{username}" class="form-control" id="username" placeholder="Enter username">
+                <input type="text" th:field="*{username}" class="form-control" id="username"
+                       placeholder="Enter username">
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="text" th:field="*{password}" class="form-control" id="password" placeholder="Enter password">
+                <input type="text" th:field="*{password}" class="form-control" id="password"
+                       placeholder="Enter password">
             </div>
-            <button type="submit" class="btn btn-danger btn-success btn-block">Login</button>
+            <button type="submit" class="btn btn-danger btn-block">Login</button>
         </form>
         <a th:href="@{/registerPage}" class="card-link">Create New Account</a>
     </div>
@@ -39,10 +41,10 @@
         var password = document.getElementById("password").value;
 
         if (username.length < 1) {
-            alert("Enter username");
+            alert("No username is that short..");
             return false;
-        } else if (password.length < 6) {
-            alert("Password need to 6 characters or more");
+        } else if (password.length < 5) {
+            alert("Not a valid password..");
             return false;
         }
         submitOK = true;

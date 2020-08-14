@@ -34,8 +34,8 @@ public class ViewController {
 
     @GetMapping("/registerPage")
     private String register(Model model) {
-        User blank = new User();
-        model.addAttribute("user", blank);
+        model.addAttribute("user", new User());
+        model.addAttribute("message", "");
         return "registerPage";
     }
 
@@ -61,8 +61,7 @@ public class ViewController {
 
     @GetMapping("/showComments")
     private String showComments(HttpSession session, @RequestParam int id, Model model) {
-        User blank = new User();
-        model.addAttribute("user", blank);
+        model.addAttribute("user", new User());
         model.addAttribute("comments", commentService.getAllCommentsByNoticeId(id));
         if(checkUserSession(session.getId())) {
             model.addAttribute("notice", noticeService.getNotice(id));

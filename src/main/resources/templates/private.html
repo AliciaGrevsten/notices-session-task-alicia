@@ -17,6 +17,10 @@
 
     <!-- Buttons: "Add New Notice" and "Login" -->
     <div class="row">
+        <!-- Trigger logout -->
+        <form action="/logout" method="get">
+            <button type="submit" class="btn btn-danger btn-lg float-left" id="myBtn">Logout</button>
+        </form>
         <!-- Trigger adding new notice -->
         <form action="/addNotice" method="get">
             <button type="submit" class="btn btn-danger btn-lg float-right"><strong>+</strong></button>
