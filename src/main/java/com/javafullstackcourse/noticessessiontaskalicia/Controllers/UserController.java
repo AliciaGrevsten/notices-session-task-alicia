@@ -1,13 +1,16 @@
 package com.javafullstackcourse.noticessessiontaskalicia.Controllers;
 
 import com.javafullstackcourse.noticessessiontaskalicia.Models.AppUser;
+import com.javafullstackcourse.noticessessiontaskalicia.Models.CommonResponse;
 import com.javafullstackcourse.noticessessiontaskalicia.Services.AppUserService;
 import com.javafullstackcourse.noticessessiontaskalicia.Utilities.SessionKeeper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
