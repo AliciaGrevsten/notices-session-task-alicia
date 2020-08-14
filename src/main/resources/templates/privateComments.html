@@ -15,6 +15,7 @@
     <br>
     <br>
 
+    <!-- Notice Card -->
     <div class="card">
         <div class="card-body">
             <h4 class="card-title" th:text="${notice.title}">Card title</h4>
@@ -24,6 +25,7 @@
         </div>
     </div>
 
+    <!-- Comments Table -->
     <table class="table table-hover">
         <thead>
         <tr>
@@ -41,6 +43,7 @@
         </tbody>
     </table>
 
+    <!-- Add New Comment -->
     <form class="form-group" action="/comment" method="post" onsubmit="return checkUserInput()">
         <input type="hidden" th:value="${notice.id}" id="id" name="id">
         <label for="commentcontent"></label>

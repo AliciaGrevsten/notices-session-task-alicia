@@ -4,17 +4,17 @@
       integrity="sha384-QDSPDoVOoSWz2ypaRUidLmLYl4RyoBWI44iA5agn6jHegBxZkNqgm2eHb6yZ5bYs" crossorigin="anonymous">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Register</title>
 </head>
 <body>
-
-
 <div class="container text-center col-lg-5 col-lg-offset-7">
     <br>
     <h1>Register New Account</h1>
     <br>
     <br>
     <div>
+
+        <!-- Register Form -->
         <form th:object="${user}" role="form" th:action="@{/register}" method="post" onsubmit="return checkUserInput()">
             <div class="form-group">
                 <label for="username">Username</label>
@@ -25,15 +25,14 @@
                 <label for="password">Password</label>
                 <input type="text" th:field="*{appUserPassword}" class="form-control" id="password" placeholder="Enter password">
             </div>
+            <!-- Message -->
             <p th:value="${message}"></p>
             <button type="submit" class="btn btn-danger btn-block">Register</button>
         </form>
         <br>
+        <!-- Back to start -->
         <a th:href="@{/}" class="card-link">Back to start</a>
-
     </div>
-
-
 </div>
 </body>
 </html>

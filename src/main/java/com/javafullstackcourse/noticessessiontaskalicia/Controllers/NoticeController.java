@@ -54,8 +54,5 @@ public class NoticeController {
             model.addAttribute("message", "You can only delete your own notices");
             response.sendRedirect("/editNotice");
         }
-
     }
-
-
 }

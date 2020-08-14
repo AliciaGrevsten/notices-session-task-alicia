@@ -7,14 +7,13 @@
     <title>Comments</title>
 </head>
 <body>
-
-
 <div class="container text-center col-lg-7 col-lg-offset-5">
     <br>
     <h1>Comments</h1>
     <br>
     <br>
 
+    <!-- Notice Card -->
     <div class="card">
         <div class="card-body">
             <h4 class="card-title" th:text="${notice.title}">Card title</h4>
@@ -23,6 +22,8 @@
             <br>
         </div>
     </div>
+
+    <!-- Table of comments -->
     <table class="table table-hover">
         <thead>
         <tr>
@@ -39,11 +40,14 @@
         </tr>
         </tbody>
     </table>
-    <p>Login to comment</p>
+
+    <!-- Message -->
+    <p class="text-danger">Login to comment</p>
+
+    <!-- Back to start -->
     <form action="/" method="get">
         <button class="btn btn-outline-secondary float-right">Back to start</button>
     </form>
-
 </div>
 </body>
 </html>

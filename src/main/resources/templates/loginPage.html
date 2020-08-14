@@ -14,6 +14,7 @@
     <br>
     <br>
     <div>
+        <!-- Login form -->
         <form th:object="${user}" role="form" th:action="@{/login}" method="post" onsubmit="return checkUserInput()">
             <div class="form-group">
                 <label for="username">Username</label>
@@ -27,10 +28,10 @@
             </div>
             <button type="submit" class="btn btn-danger btn-block">Login</button>
         </form>
+        <br>
+        <!-- Create new account -->
         <a th:href="@{/registerPage}" class="card-link">Create New Account</a>
     </div>
-
-
 </div>
 </body>
 </html>

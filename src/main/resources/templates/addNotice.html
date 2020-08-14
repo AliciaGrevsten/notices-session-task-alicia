@@ -4,17 +4,16 @@
       integrity="sha384-QDSPDoVOoSWz2ypaRUidLmLYl4RyoBWI44iA5agn6jHegBxZkNqgm2eHb6yZ5bYs" crossorigin="anonymous">
 <head>
     <meta charset="UTF-8">
-    <title>Notice Board</title>
+    <title>Add New Notice</title>
 </head>
 <body>
-
-
 <div class="container text-center col-lg-4 col-lg-offset-8">
     <br>
     <h1>Add New Notice</h1>
     <br>
     <br>
 
+    <!-- New Notice Form -->
     <form class="form-group" action="/add" method="post" onsubmit="return checkUserInput()"
           enctype="multipart/form-data">
         <div class="form-group">
@@ -27,19 +26,21 @@
         <button type="submit" class="btn btn-outline-primary float-right">Publish</button>
     </form>
 
+    <!-- Back to start -->
     <form action="/" method="get">
         <button class="btn btn-outline-secondary float-left">Back to start</button>
     </form>
 </div>
+
 <script>
     function checkUserInput() {
         var title = document.getElementById("title").value;
         var content = document.getElementById("content").value;
 
-        if (title.length == 0) {
+        if (title.length === 0) {
             alert("Title is mandatory!");
             return false;
-        } else if (content.length == 0) {
+        } else if (content.length === 0) {
             alert("You have to write something in content!");
             return false;
         }

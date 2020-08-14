@@ -32,7 +32,6 @@ public class UserController {
             SessionKeeper.getInstance().addSession(session.getId());
             SessionKeeper.getInstance().addUserSession(user);
         }
-
         response.sendRedirect("/");
     }
 
