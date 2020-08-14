@@ -18,12 +18,12 @@
         <form th:object="${user}" role="form" th:action="@{/register}" method="post" onsubmit="return checkUserInput()">
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" th:field="*{username}" class="form-control" id="username"
+                <input type="text" th:field="*{appUserUsername}" class="form-control" id="username"
                        placeholder="Enter username">
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="text" th:field="*{password}" class="form-control" id="password" placeholder="Enter password">
+                <input type="text" th:field="*{appUserPassword}" class="form-control" id="password" placeholder="Enter password">
             </div>
             <p th:value="${message}"></p>
             <button type="submit" class="btn btn-danger btn-block">Register</button>

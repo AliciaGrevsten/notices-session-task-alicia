@@ -28,21 +28,20 @@ public class ViewController {
 
     @GetMapping("/loginPage")
     private String login(Model model) {
-        model.addAttribute("user", new User());
+        model.addAttribute("user", new AppUser());
         return "loginPage";
     }
 
     @GetMapping("/registerPage")
     private String register(Model model) {
-        model.addAttribute("user", new User());
+        model.addAttribute("user", new AppUser());
         model.addAttribute("message", "");
         return "registerPage";
     }
 
     @GetMapping("/")
     public String listNotices(HttpServletResponse response, HttpSession session, Model model){
-        User blank = new User();
-        model.addAttribute("user", blank);
+        model.addAttribute("user", new AppUser());
         if(checkUserSession(session.getId())) {
             model.addAttribute("notices", noticeService.getAllNotices());
             return "private";
@@ -61,13 +60,12 @@ public class ViewController {
 
     @GetMapping("/showComments")
     private String showComments(HttpSession session, @RequestParam int id, Model model) {
-        model.addAttribute("user", new User());
+        model.addAttribute("user", new AppUser());
         model.addAttribute("comments", commentService.getAllCommentsByNoticeId(id));
+        model.addAttribute("notice", noticeService.getNotice(id));
         if(checkUserSession(session.getId())) {
-            model.addAttribute("notice", noticeService.getNotice(id));
             return "privateComments";
         } else {
-            model.addAttribute("notices", noticeService.getAllNotices());
             return "publicComments";
         }
     }

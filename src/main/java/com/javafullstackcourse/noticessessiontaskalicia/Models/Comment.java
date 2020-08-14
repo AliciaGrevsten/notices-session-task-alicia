@@ -17,7 +17,7 @@ public class Comment {
     public Date published;
 
     @ManyToOne
-    public User user;
+    public AppUser appUser;
 
     @ManyToOne
     public Notice notice;

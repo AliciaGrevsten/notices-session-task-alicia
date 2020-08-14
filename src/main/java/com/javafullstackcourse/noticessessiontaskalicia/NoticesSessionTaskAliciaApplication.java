@@ -1,6 +1,5 @@
 package com.javafullstackcourse.noticessessiontaskalicia;
 
-import com.javafullstackcourse.noticessessiontaskalicia.Seeders.Seeder;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

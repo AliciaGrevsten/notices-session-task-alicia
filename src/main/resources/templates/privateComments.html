@@ -15,6 +15,15 @@
     <br>
     <br>
 
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title" th:text="${notice.title}">Card title</h4>
+            <h6 class="card-subtitle mb-2 text-muted" th:text="${#dates.format(notice.published, 'yyyy-MM-dd HH:mm')}"></h6>
+            <p class="card-text" th:text="${notice.content}"></p>
+            <br>
+        </div>
+    </div>
+
     <table class="table table-hover">
         <thead>
         <tr>
@@ -25,7 +34,7 @@
         </thead>
         <tbody>
         <tr class="table-primary" th:each="comment:${comments}">
-            <td th:text="${comment.user.username}"></td>
+            <td th:text="${comment.appUser.appUserUsername}"></td>
             <td th:text="${comment.content}"></td>
             <td th:text="${#dates.format(comment.published, 'yyyy-MM-dd HH:mm')}"></td>
         </tr>
@@ -37,11 +46,11 @@
         <label for="commentcontent"></label>
         <textarea class="form-control" id="commentcontent" name="content" rows="3"
                                                       placeholder="New comment.."></textarea>
-        <button type="submit" class="btn btn-outline-primary float-right">Comment</button>
+        <button type="submit" class="btn btn-outline-primary">Comment</button>
     </form>
-
+    <br>
     <form action="/" method="get">
-        <button class="btn btn-outline-secondary float-right">Back to start</button>
+        <button class="btn btn-outline-secondary">Back to start</button>
     </form>
 
 </div>

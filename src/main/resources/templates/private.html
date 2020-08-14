@@ -30,10 +30,10 @@
     <br>
 
     <!-- Notices -->
-    <div class="cards">
-        <div class="card border-primary mb-3 ml-1 mr-2 float-left" th:each="notice:${notices}"
+    <div class="d-flex align-content-stretch flex-wrap">
+        <div class="card border-primary mr-3 mb-3 float-left" th:each="notice:${notices}"
              style="max-width: 20rem;">
-            <div class="card-header" th:text="${notice.user.username}">Header</div>
+            <div class="card-header" th:text="${notice.appUser.appUserUsername}">Header</div>
             <form class="card-body">
                 <h4 class="card-title" th:text="${notice.title}">Primary card title</h4>
                 <h6 class="card-subtitle mb-2 text-muted"

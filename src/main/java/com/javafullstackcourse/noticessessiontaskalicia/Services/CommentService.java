@@ -1,15 +1,12 @@
 package com.javafullstackcourse.noticessessiontaskalicia.Services;
 
 import com.javafullstackcourse.noticessessiontaskalicia.Models.Comment;
-import com.javafullstackcourse.noticessessiontaskalicia.Models.User;
 import com.javafullstackcourse.noticessessiontaskalicia.Repositories.CommentRepository;
-import com.javafullstackcourse.noticessessiontaskalicia.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.sql.DataSource;
-import java.util.Collections;
 import java.util.List;
 
 @Service

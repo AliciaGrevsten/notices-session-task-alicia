@@ -21,5 +21,5 @@ public class Notice {
     public Date published;
 
     @ManyToOne
-    public User user;
+    public AppUser appUser;
 }

@@ -2,7 +2,7 @@ package com.javafullstackcourse.noticessessiontaskalicia.Controllers;
 
 import com.javafullstackcourse.noticessessiontaskalicia.Models.Notice;
 import com.javafullstackcourse.noticessessiontaskalicia.Services.NoticeService;
-import com.javafullstackcourse.noticessessiontaskalicia.Services.UserService;
+import com.javafullstackcourse.noticessessiontaskalicia.Utilities.SessionKeeper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -17,17 +17,13 @@ public class NoticeController {
     @Autowired
     private NoticeService noticeService;
 
-    // REMOVE LATER
-    @Autowired
-    private UserService userService;
-
     @RequestMapping(value = "/add", method = {RequestMethod.POST, RequestMethod.GET})
     public void addNotice(HttpServletResponse response, @RequestParam String title, String content) throws IOException {
         Notice notice = new Notice();
         notice.title = title;
         notice.content = content;
         notice.published = new Date();
-        notice.user = userService.getUser(1); // CHANGE TO SESSION
+        notice.appUser = SessionKeeper.getInstance().getUserSession();
 
         noticeService.addNotice(notice);
         response.sendRedirect("/");

@@ -1,7 +1,7 @@
 package com.javafullstackcourse.noticessessiontaskalicia.Controllers;
 
-import com.javafullstackcourse.noticessessiontaskalicia.Models.User;
-import com.javafullstackcourse.noticessessiontaskalicia.Services.UserService;
+import com.javafullstackcourse.noticessessiontaskalicia.Models.AppUser;
+import com.javafullstackcourse.noticessessiontaskalicia.Services.AppUserService;
 import com.javafullstackcourse.noticessessiontaskalicia.Utilities.SessionKeeper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,18 +18,19 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    private UserService userService;
+    private AppUserService appUserService;
 
     @PostMapping("/login")
-    public void login(@ModelAttribute("user")User user, HttpServletResponse response, HttpSession session) throws IOException {
-        List<User> allUsers = userService.getAllUsers();
+    public void login(@ModelAttribute("user") AppUser user, HttpServletResponse response, HttpSession session) throws IOException {
+        List<AppUser> allUsers = appUserService.getAllUsers();
 
         boolean validLogin = allUsers
                 .stream()
-                .anyMatch(x -> x.getUsername().equals(user.getUsername()) && x.getPassword().equals(user.getPassword()));
+                .anyMatch(x -> x.getAppUserUsername().equals(user.getAppUserUsername()) && x.getAppUserPassword().equals(user.getAppUserPassword()));
 
         if(validLogin) {
             SessionKeeper.getInstance().addSession(session.getId());
+            SessionKeeper.getInstance().addUserSession(user);
         }
 
         response.sendRedirect("/");
@@ -42,15 +43,15 @@ public class UserController {
     }
 
     @PostMapping ("/register")
-    public void register(@ModelAttribute("user") User user, HttpServletResponse response, Model model) throws IOException {
-        List<User> allUsers = userService.getAllUsers();
+    public void register(@ModelAttribute("user") AppUser user, HttpServletResponse response, Model model) throws IOException {
+        List<AppUser> allUsers = appUserService.getAllUsers();
 
         boolean userExists = allUsers
                 .stream()
-                .anyMatch(x -> x.getUsername().equals(user.getUsername()));
+                .anyMatch(x -> x.getAppUserUsername().equals(user.getAppUserUsername()));
 
         if (!userExists) {
-            userService.addUser(user);
+            appUserService.addUser(user);
             response.sendRedirect("loginPage");
         } else {
             model.addAttribute("message", "User already exists.");
