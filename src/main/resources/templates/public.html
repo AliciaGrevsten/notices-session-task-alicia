@@ -18,12 +18,8 @@
     <!-- Buttons: "Add New Notice" and "Login" -->
     <div class="row">
         <!-- Trigger loading page -->
-        <form action="/login" method="get">
+        <form action="/loginPage" method="get">
             <button type="submit" class="btn btn-danger btn-lg float-left" id="myBtn">Login</button>
-        </form>
-        <!-- Trigger adding new notice -->
-        <form action="/addNotice" method="get">
-            <button type="submit" class="btn btn-danger btn-lg float-right"><strong>+</strong></button>
         </form>
     </div>
     <br>
@@ -41,8 +37,6 @@
                 <p class="card-text" th:text="${notice.content}">Some quick example text to build on the card title and
                     make up the bulk of the
                     card's content.</p>
-                <a th:href="@{/editNotice/(id=${notice.id})}" class="card-link">Edit</a>
-                <a th:href="@{/delete/(id=${notice.id})}" class="card-link">Delete</a>
                 <a th:href="@{/showComments/(id=${notice.id})}" class="card-link">Comments</a>
             </form>
         </div>

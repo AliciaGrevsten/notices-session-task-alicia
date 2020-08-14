@@ -1,20 +1,14 @@
 package com.javafullstackcourse.noticessessiontaskalicia.Controllers;
 
 import com.javafullstackcourse.noticessessiontaskalicia.Models.Notice;
-import com.javafullstackcourse.noticessessiontaskalicia.Services.CommentService;
 import com.javafullstackcourse.noticessessiontaskalicia.Services.NoticeService;
 import com.javafullstackcourse.noticessessiontaskalicia.Services.UserService;
-import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Date;
 
 @Controller
@@ -23,19 +17,9 @@ public class NoticeController {
     @Autowired
     private NoticeService noticeService;
 
-    @Autowired
-    private CommentService commentService;
-
     // REMOVE LATER
     @Autowired
     private UserService userService;
-
-    @GetMapping("/")
-    public String listNotices(Model model){
-        model.addAttribute("notices", noticeService.getAllNotices());
-        //model.addAttribute("comments", commentService.getAllComments());
-        return "index";
-    }
 
     @RequestMapping(value = "/add", method = {RequestMethod.POST, RequestMethod.GET})
     public void addNotice(HttpServletResponse response, @RequestParam String title, String content) throws IOException {

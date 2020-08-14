@@ -1,15 +1,16 @@
 package com.javafullstackcourse.noticessessiontaskalicia.Controllers;
 
-import com.javafullstackcourse.noticessessiontaskalicia.Models.Notice;
-import com.javafullstackcourse.noticessessiontaskalicia.Services.CommentService;
-import com.javafullstackcourse.noticessessiontaskalicia.Services.NoticeService;
+import com.javafullstackcourse.noticessessiontaskalicia.Models.*;
+import com.javafullstackcourse.noticessessiontaskalicia.Services.*;
+import com.javafullstackcourse.noticessessiontaskalicia.Utilities.SessionKeeper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class ViewController {
@@ -25,9 +26,30 @@ public class ViewController {
         return "addNotice";
     }
 
-    @GetMapping("/login")
-    private String login() {
-        return "login";
+    @GetMapping("/loginPage")
+    private String login(Model model) {
+        model.addAttribute("user", new User());
+        return "loginPage";
+    }
+
+    @GetMapping("/registerPage")
+    private String register(Model model) {
+        User blank = new User();
+        model.addAttribute("user", blank);
+        return "registerPage";
+    }
+
+    @GetMapping("/")
+    public String listNotices(HttpServletResponse response, HttpSession session, Model model){
+        User blank = new User();
+        model.addAttribute("user", blank);
+        if(checkUserSession(session.getId())) {
+            model.addAttribute("notices", noticeService.getAllNotices());
+            return "private";
+        } else {
+            model.addAttribute("notices", noticeService.getAllNotices());
+            return "public";
+        }
     }
 
     @GetMapping("/editNotice")
@@ -38,9 +60,20 @@ public class ViewController {
     }
 
     @GetMapping("/showComments")
-    private String showComments(@RequestParam int id, Model model) {
+    private String showComments(HttpSession session, @RequestParam int id, Model model) {
+        User blank = new User();
+        model.addAttribute("user", blank);
         model.addAttribute("comments", commentService.getAllCommentsByNoticeId(id));
-        model.addAttribute("notice", noticeService.getNotice(id));
-        return "showComments";
+        if(checkUserSession(session.getId())) {
+            model.addAttribute("notice", noticeService.getNotice(id));
+            return "privateComments";
+        } else {
+            model.addAttribute("notices", noticeService.getAllNotices());
+            return "publicComments";
+        }
+    }
+
+    private boolean checkUserSession(String sessionId) {
+        return SessionKeeper.getInstance().checkSession(sessionId);
     }
 }

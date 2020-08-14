@@ -14,4 +14,8 @@ public class User {
 
     @Column(nullable = false)
     public String password;
+
+    public String getUsername(){ return username; }
+
+    public String getPassword(){ return password; }
 }
