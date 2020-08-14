@@ -30,6 +30,12 @@ public class SessionKeeper {
         }
     }
 
+    public void removeUserSession(AppUser user) {
+        if (userSession.equals(user)) {
+            userSession = null;
+        }
+    }
+
     public static SessionKeeper getInstance() {
         if (sessionKeeperInstance == null) {
             sessionKeeperInstance = new SessionKeeper();

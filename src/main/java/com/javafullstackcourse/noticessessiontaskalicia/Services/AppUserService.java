@@ -24,8 +24,10 @@ public class AppUserService {
         return appUserRepository.findById(id).get();
     }
 
+    public AppUser getUserByUsername(String username) { return appUserRepository.getAppUserByAppUserUsername(username); }
+
     public List<AppUser> getAllUsers() {
-        return appUserRepository.findAll(Sort.by(Sort.Direction.DESC, "published"));
+        return appUserRepository.findAll();
     }
 
     public void deleteUser(int id) {

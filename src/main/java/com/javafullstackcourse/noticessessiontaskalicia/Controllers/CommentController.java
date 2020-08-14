@@ -1,6 +1,8 @@
 package com.javafullstackcourse.noticessessiontaskalicia.Controllers;
 
+import com.javafullstackcourse.noticessessiontaskalicia.Models.AppUser;
 import com.javafullstackcourse.noticessessiontaskalicia.Models.Comment;
+import com.javafullstackcourse.noticessessiontaskalicia.Services.AppUserService;
 import com.javafullstackcourse.noticessessiontaskalicia.Services.CommentService;
 import com.javafullstackcourse.noticessessiontaskalicia.Services.NoticeService;
 import com.javafullstackcourse.noticessessiontaskalicia.Utilities.SessionKeeper;
@@ -22,15 +24,22 @@ public class CommentController {
     @Autowired
     private NoticeService noticeService;
 
+    @Autowired
+    private AppUserService appUserService;
+
     @RequestMapping(value = "/comment", method = {RequestMethod.POST, RequestMethod.GET})
     public void addComment(HttpServletResponse response, @RequestParam int id, String content, HttpSession session) throws IOException {
-        Comment comment = new Comment();
-        comment.notice = noticeService.getNotice(id);
-        comment.content = content;
-        comment.published = new Date();
-        comment.appUser = SessionKeeper.getInstance().getUserSession();
+        if (SessionKeeper.getInstance().checkSession(session.getId())) {
+            AppUser user = appUserService.getUserByUsername(SessionKeeper.getInstance().getUserSession().appUserUsername);
+            Comment comment = new Comment();
+            comment.notice = noticeService.getNotice(id);
+            comment.content = content;
+            comment.published = new Date();
+            comment.appUser = user;
 
-        commentService.addComment(comment);
-        response.sendRedirect("/showComments?id=" + id);
+            commentService.addComment(comment);
+            response.sendRedirect("/showComments?id=" + id);
+        }
+        response.sendRedirect("loginPage");
     }
 }
